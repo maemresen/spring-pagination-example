@@ -11,6 +11,7 @@ import java.util.List;
 @Builder
 public class CountQueryTest<T> {
 
+    private List<T> distinctWithoutCustomCountQuery;
     private List<T> withoutCustomCountQuery;
     private List<T> withCustomCountQuery;
 }

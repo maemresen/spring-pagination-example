@@ -8,9 +8,10 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface BookRepository extends JpaRepository<Book, Long> {
 
-    @Query(
-            value = "SELECT b FROM Book b LEFT JOIN b.chapters AS bc WHERE bc.read IS FALSE",
-            countQuery = " SELECT COUNT(b) FROM Book b")
+    @Query("SELECT DISTINCT b FROM Book b LEFT JOIN b.chapters AS bc WHERE bc.read IS FALSE")
+    Page<Book> getDistinctWithoutCustomCountQuery(Pageable pageable);
+
+    @Query("SELECT b FROM Book b LEFT JOIN b.chapters AS bc WHERE bc.read IS FALSE")
     Page<Book> getWithoutCustomCountQuery(Pageable pageable);
 
     @Query(
